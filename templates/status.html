@@ -13,6 +13,11 @@
         {% if seen %}
             <h2>You've been called</h2>
             <p class="subtitle">Please proceed to the counter, or check with staff if you missed your turn.</p>
+        {% elif position == 1 %}
+            <h2>Hello, {{ name }}</h2>
+            <p class="subtitle">Priority: {{ priority }}</p>
+            <p><strong>It's your turn.</strong> Please proceed to the attending room now.</p>
+            <p class="subtitle">This page refreshes automatically every 15 seconds.</p>
         {% else %}
             <h2>Hello, {{ name }}</h2>
             <p class="subtitle">Priority: {{ priority }}</p>
