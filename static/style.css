@@ -1,18 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+    --ink: #1b2b29;
+    --teal: #0f6b63;
+    --teal-dark: #0b4f49;
+    --bg: #f4f7f6;
+    --card: #ffffff;
+    --hairline: #dce4e1;
+    --muted: #64766f;
+    --high: #b3402a;
+    --high-bg: #f7e6e2;
+    --medium: #a06d1f;
+    --medium-bg: #f6ecd8;
+    --low: #3f8f6b;
+    --low-bg: #e3f1e9;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f4f6f8;
+    font-family: 'IBM Plex Sans', 'Segoe UI', Arial, sans-serif;
+    background: var(--bg);
     margin: 0;
-    padding: 40px 20px;
-    color: #1f2937;
+    padding: 48px 20px;
+    color: var(--ink);
+    line-height: 1.5;
 }
 
 .container {
     max-width: 480px;
     margin: 0 auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    background: var(--card);
+    padding: 36px 36px 32px;
+    border-radius: 4px;
+    border: 1px solid var(--hairline);
+    box-shadow: 0 1px 2px rgba(15, 43, 41, 0.04);
 }
 
 .container.wide {
@@ -20,97 +44,193 @@ body {
 }
 
 h1 {
-    color: #0f766e;
-    margin-bottom: 4px;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--teal-dark);
+    margin: 0 0 14px;
+    letter-spacing: -0.01em;
+}
+
+/* Signature: a small heartbeat/ECG trace under the hospital name,
+   drawn as a pure-CSS background pattern — no image asset needed. */
+h1::after {
+    content: "";
+    display: block;
+    width: 140px;
+    height: 14px;
+    margin-top: 10px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='14' viewBox='0 0 140 14'%3E%3Cpath d='M0 7 H40 L48 1 L56 13 L64 7 H100 L106 2 L112 12 L118 7 H140' fill='none' stroke='%230f6b63' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.85;
 }
 
 h2 {
-    font-size: 18px;
-    color: #374151;
-    margin-top: 0;
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 17px;
+    color: var(--ink);
+    margin: 0 0 4px;
 }
 
 .subtitle {
-    color: #6b7280;
+    color: var(--muted);
     font-size: 14px;
+    margin-bottom: 24px;
 }
 
 label {
     display: block;
-    margin-top: 16px;
+    margin-top: 18px;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 input, textarea {
     width: 100%;
-    padding: 10px;
-    margin-top: 6px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 14px;
-    box-sizing: border-box;
+    padding: 11px 12px;
+    margin-top: 7px;
+    border: 1px solid var(--hairline);
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--ink);
+}
+
+input:focus, textarea:focus, button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--teal);
+    outline-offset: 1px;
+}
+
+textarea {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    resize: vertical;
 }
 
 button {
-    margin-top: 20px;
-    background: #0f766e;
+    margin-top: 22px;
+    background: var(--teal);
     color: white;
     border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    font-size: 15px;
+    padding: 12px 22px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
     cursor: pointer;
+    transition: background 0.15s ease;
 }
 
 button:hover {
-    background: #115e59;
+    background: var(--teal-dark);
 }
 
 .dashboard-link {
     display: inline-block;
-    margin-top: 20px;
-    color: #0f766e;
+    margin-top: 24px;
+    color: var(--teal);
     text-decoration: none;
     font-size: 14px;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+}
+
+.dashboard-link:hover {
+    border-bottom-color: var(--teal);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 16px;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #e5e7eb;
+    margin-top: 20px;
     font-size: 14px;
 }
 
 th {
-    background: #f0fdfa;
-    color: #0f766e;
+    background: var(--bg);
+    color: var(--teal-dark);
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 2px solid var(--hairline);
+}
+
+td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--hairline);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+}
+
+/* Signature: a colored left-edge band per row, echoing a
+   physical triage wristband, applied to your existing priority classes. */
+.priority-high,
+.priority-medium,
+.priority-low {
+    border-left: 5px solid transparent;
+}
+
+.priority-high {
+    border-left-color: var(--high);
+}
+
+.priority-medium {
+    border-left-color: var(--medium);
+}
+
+.priority-low {
+    border-left-color: var(--low);
 }
 
 .badge {
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 12px;
+    padding: 4px 11px;
+    border-radius: 3px;
+    font-size: 11px;
     font-weight: 600;
+    font-family: 'IBM Plex Sans', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
 }
 
 .priority-high .badge {
-    background: #fee2e2;
-    color: #b91c1c;
+    background: var(--high-bg);
+    color: var(--high);
 }
 
 .priority-medium .badge {
-    background: #fef3c7;
-    color: #92400e;
+    background: var(--medium-bg);
+    color: var(--medium);
 }
 
 .priority-low .badge {
-    background: #dcfce7;
-    color: #166534;
+    background: var(--low-bg);
+    color: var(--low);
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 24px 14px;
+    }
+    .container {
+        padding: 24px 22px;
+    }
+    h1 {
+        font-size: 24px;
+    }
+    table {
+        font-size: 13px;
+    }
+    th, td {
+        padding: 8px 10px;
+    }
 }
