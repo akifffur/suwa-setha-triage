@@ -14,6 +14,7 @@
     --medium-bg: #f6ecd8;
     --low: #3f8f6b;
     --low-bg: #e3f1e9;
+    --accent2: #2f9c8a;
 }
 
 * {
@@ -22,7 +23,8 @@
 
 body {
     font-family: 'IBM Plex Sans', 'Segoe UI', Arial, sans-serif;
-    background: var(--bg);
+    background: radial-gradient(circle at 50% 0%, #eef6f3 0%, var(--bg) 55%);
+    min-height: 100vh;
     margin: 0;
     padding: 48px 20px;
     color: var(--ink);
@@ -30,13 +32,27 @@ body {
 }
 
 .container {
+    position: relative;
     max-width: 480px;
     margin: 0 auto;
     background: var(--card);
-    padding: 36px 36px 32px;
-    border-radius: 4px;
+    padding: 40px 36px 32px;
+    border-radius: 6px;
     border: 1px solid var(--hairline);
-    box-shadow: 0 1px 2px rgba(15, 43, 41, 0.04);
+    box-shadow: 0 12px 32px -16px rgba(15, 43, 41, 0.18), 0 1px 2px rgba(15, 43, 41, 0.04);
+    overflow: hidden;
+}
+
+/* Signature echo: a thin triage-color gradient bar across the top of
+   every card, tying the form/dashboard back to the wristband motif. */
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--teal) 0%, var(--accent2) 50%, var(--low) 100%);
 }
 
 .container.wide {
@@ -115,20 +131,33 @@ textarea {
 
 button {
     margin-top: 22px;
-    background: var(--teal);
+    background: linear-gradient(180deg, #12796f 0%, var(--teal) 55%, var(--teal-dark) 100%);
     color: white;
     border: none;
-    padding: 12px 22px;
-    border-radius: 4px;
+    padding: 13px 24px;
+    border-radius: 6px;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.01em;
     cursor: pointer;
-    transition: background 0.15s ease;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 6px 14px -6px rgba(15, 107, 99, 0.55);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
 }
 
 button:hover {
-    background: var(--teal-dark);
+    background: linear-gradient(180deg, #14867b 0%, var(--teal-dark) 55%, #093c37 100%);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 8px 18px -6px rgba(15, 107, 99, 0.6);
+}
+
+button:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow:
+        inset 0 1px 3px rgba(0, 0, 0, 0.25),
+        0 2px 6px -3px rgba(15, 107, 99, 0.5);
 }
 
 .dashboard-link {
