@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suwa Setha Hospital - Patient Check-In</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Suwa Setha Hospital</h1>
+        <h2>Patient Symptom Check-In</h2>
+        <p class="subtitle">Please describe your symptoms below so our system can prioritize your care.</p>
+
+        <form action="/submit" method="POST">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="e.g. Nimal Perera" required>
+
+            <label for="symptoms">Describe your symptoms</label>
+            <textarea id="symptoms" name="symptoms" rows="4" placeholder="e.g. chest pain and difficulty breathing" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <a class="dashboard-link" href="/dashboard">View Staff Dashboard →</a>
+    </div>
+</body>
+</html>
