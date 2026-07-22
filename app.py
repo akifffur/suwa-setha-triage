@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from functools import wraps
 from datetime import datetime
+import uuid
 
 app = Flask(__name__)
 app.secret_key = "change-this-to-a-random-secret-key"  # needed for sessions
@@ -113,7 +114,8 @@ def index():
 
 @app.route("/submit", methods=["POST"])
 def submit():
-    """Handles form submission, scores the symptoms, and adds to the queue."""
+    """Handles form submission, scores the symptoms, adds to the queue,
+    and sends the patient to a status page showing their position."""
     name = request.form.get("name", "").strip()
     symptoms = request.form.get("symptoms", "").strip()
 
@@ -121,8 +123,10 @@ def submit():
         return redirect(url_for("index"))
 
     score, priority = score_symptoms(symptoms)
+    patient_id = str(uuid.uuid4())[:8]  # short unique ticket ID for the status page
 
     patients.append({
+        "id": patient_id,
         "name": name,
         "symptoms": symptoms,
         "score": score,
@@ -131,7 +135,36 @@ def submit():
         "timestamp": datetime.now()
     })
 
-    return redirect(url_for("index"))
+    return redirect(url_for("status", patient_id=patient_id))
+
+
+@app.route("/status/<patient_id>")
+def status(patient_id):
+    """Patient-facing queue status page. Shows the patient's current
+    position in the queue and auto-refreshes so they can track it
+    without needing to keep resubmitting or asking staff."""
+    sorted_patients = sorted(patients, key=lambda p: (-p["score"], p["timestamp"]))
+
+    position = None
+    patient = None
+    for i, p in enumerate(sorted_patients):
+        if p["id"] == patient_id:
+            position = i + 1
+            patient = p
+            break
+
+    if patient is None:
+        # Either already marked "seen" by staff, or an invalid/old link
+        return render_template("status.html", seen=True)
+
+    return render_template(
+        "status.html",
+        seen=False,
+        position=position,
+        total=len(sorted_patients),
+        priority=patient["priority"],
+        name=patient["name"]
+    )
 
 
 # ---------------------------------------------------------

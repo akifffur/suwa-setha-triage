@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Queue Status - Suwa Setha Hospital</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% if not seen %}
+    <meta http-equiv="refresh" content="15">
+    {% endif %}
+</head>
+<body>
+    <div class="container">
+        <h1>Suwa Setha Hospital</h1>
+        {% if seen %}
+            <h2>You've been called</h2>
+            <p class="subtitle">Please proceed to the counter, or check with staff if you missed your turn.</p>
+        {% else %}
+            <h2>Hello, {{ name }}</h2>
+            <p class="subtitle">Priority: {{ priority }}</p>
+            <p>You are <strong>#{{ position }}</strong> of {{ total }} in the queue.</p>
+            <p class="subtitle">This page refreshes automatically every 15 seconds.</p>
+        {% endif %}
+        <a href="{{ url_for('index') }}" class="dashboard-link">&larr; Back to check-in</a>
+    </div>
+</body>
+</html>
